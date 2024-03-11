@@ -48,13 +48,6 @@ class _NotesViewState extends State<NotesView> {
                     if (context.mounted) {
                       context.read<AuthBloc>().add(const AuthEventLogginOut());
                     }
-                    // await AuthService.firebase().logOut();
-                    // if (context.mounted) {
-                    //   Navigator.of(context).pushNamedAndRemoveUntil(
-                    //     loginRoute,
-                    //     (_) => false,
-                    //   );
-                    // }
                   }
               }
             },

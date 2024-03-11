@@ -16,7 +16,6 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
-  // CloseDialog? _closeDilogHandle;
 
   @override
   void initState() {
@@ -37,13 +36,6 @@ class _LoginViewState extends State<LoginView> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) async {
         if (state is AuthStateLoggedOut) {
-          // final closeDialog = _closeDilogHandle;
-          // if (!state.loading && closeDialog != null) {
-          //   closeDialog();
-          //   _closeDilogHandle = null;
-          // } else if (state.loading && closeDialog == null) {
-          //   _closeDilogHandle = loadingDialog(context, 'Loading...');
-          // }
           if (state.exception is InvalidEmailAuthException) {
             await showErrorDialog(context, 'Invalid Email');
           } else if (state.exception is InvalidCredentialsAuthException) {
@@ -87,56 +79,15 @@ class _LoginViewState extends State<LoginView> {
             ),
             TextButton(
               onPressed: () async {
-                // try {
                 final email = _emailController.text;
                 final password = _passwordController.text;
-                // final user = await AuthService.firebase().logIn(
-                //   email: email,
-                //   password: password,
-                // );
-                // if (context.mounted) {
                 context.read<AuthBloc>().add(
                       AuthEventLogginIn(
                         email: email,
                         password: password,
                       ),
                     );
-                // }
               },
-              //   //Checking if the context is still on the screen or still alive
-              // if (context.mounted) {
-              //   //checking if user's emailVerified or not
-              //   if (user.isEmailVerified) {
-              //     Navigator.of(context).pushNamedAndRemoveUntil(
-              //       notesRoute,
-              //       (route) => false,
-              //     );
-              //   } else {
-              //     Navigator.of(context).pushNamedAndRemoveUntil(
-              //       emailVerificationRoute,
-              //       (route) => false,
-              //     );
-              //   }
-              // }
-              //checking FirebaseAuthException errors
-              //   } on InvalidEmailAuthException {
-              //     if (context.mounted) {
-              //       await showErrorDialog(context, "Invalid Email");
-              //     }
-              //   } on InvalidCredentialsAuthException {
-              //     if (context.mounted) {
-              //       await showErrorDialog(context, "Invalid Credentials");
-              //     }
-              //   } on ChannelErrorAuthException {
-              //     if (context.mounted) {
-              //       await showErrorDialog(context, "Something is missing");
-              //     }
-              //   } on GenericAuthException {
-              //     if (context.mounted) {
-              //       await showErrorDialog(context, "Something went wrong");
-              //     }
-              //   }
-              // },
               child: const Text("Login"),
             ),
             TextButton(

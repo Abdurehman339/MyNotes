@@ -67,12 +67,6 @@ class EmailVerificationView extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     context.read<AuthBloc>().add(const AuthEventLogginOut());
-                    // AuthService.firebase().logOut();
-                    // Navigator.pushNamedAndRemoveUntil(
-                    //   context,
-                    //   loginRoute,
-                    //   (route) => false,
-                    // );
                   },
                   child: const Text("Restart"),
                 ),

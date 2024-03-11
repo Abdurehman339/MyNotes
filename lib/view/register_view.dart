@@ -90,54 +90,13 @@ class _RegisterViewState extends State<RegisterView> {
                 // try {
                 final email = _emailController.text;
                 final password = _passwordController.text;
-                context.read<AuthBloc>().add(AuthEventRegister(
-                      email: email,
-                      password: password,
-                    ));
+                context.read<AuthBloc>().add(
+                      AuthEventRegister(
+                        email: email,
+                        password: password,
+                      ),
+                    );
               },
-              // await AuthService.firebase().createUser(
-              //   email: email,
-              //   password: password,
-              // );
-              // final user = AuthService.firebase().currentUser;
-              // //Checking if the widget is still on the screen
-              // if (context.mounted) {
-              //   //checking if the email is verified or not
-              //   if (user?.isEmailVerified ?? false) {
-              //     Navigator.pushNamedAndRemoveUntil(
-              //       context,
-              //       notesRoute,
-              //       (route) => false,
-              //     );
-              //   } else {
-              //     Navigator.pushNamed(context, emailVerificationRoute);
-              //   }
-              // }
-              //Handling FirebaseAuthException errors
-              //   } on EmailAlreadyInUseAuthException {
-              //     if (context.mounted) {
-              //       await showErrorDialog(context, "Email is already in use");
-              //     }
-              //   } on WeakPasswordAuthException {
-              //     if (context.mounted) {
-              //       await showErrorDialog(
-              //           context, "Please enter a strong password");
-              //     }
-              //   } on InvalidEmailAuthException {
-              //     if (context.mounted) {
-              //       await showErrorDialog(
-              //           context, "Please enter a valid email address");
-              //     }
-              //   } on ChannelErrorAuthException {
-              //     if (context.mounted) {
-              //       await showErrorDialog(context, "There is something missing");
-              //     }
-              //   } on GenericAuthException {
-              //     if (context.mounted) {
-              //       await showErrorDialog(context, 'Something went wrong');
-              //     }
-              //   }
-              // },
               child: const Text("Register"),
             ),
             TextButton(
