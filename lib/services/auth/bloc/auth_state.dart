@@ -54,3 +54,13 @@ class AuthStateLoggedOut extends AuthState with EquatableMixin {
   @override
   List<Object?> get props => [exception, isLoading];
 }
+
+class AuthStateResetPassword extends AuthState {
+  final Exception? exception;
+  final bool hasSentEmail;
+  const AuthStateResetPassword({
+    required this.hasSentEmail,
+    required this.exception,
+    required bool isLoading,
+  }) : super(isLoading: isLoading);
+}

@@ -11,13 +11,14 @@ import 'package:my_notes/view/notes_view/notes_view.dart';
 import 'package:my_notes/view/register_view.dart';
 import 'package:my_notes/view/email_verification_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_notes/view/reset_password_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Notes',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -40,7 +41,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<AuthBloc>().add(const AuthEventInitialize());
     return BlocConsumer<AuthBloc, AuthState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state.isLoading) {
           LoadingScreen().show(
             context: context,
@@ -59,9 +60,13 @@ class HomePage extends StatelessWidget {
           return const EmailVerificationView();
         } else if (state is AuthStateRegistering) {
           return const RegisterView();
+        } else if (state is AuthStateResetPassword) {
+          return const ResetPasswordView();
         } else {
           return const Scaffold(
-            body: CircularProgressIndicator(),
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
           );
         }
       },

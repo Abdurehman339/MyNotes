@@ -51,52 +51,64 @@ class _LoginViewState extends State<LoginView> {
         appBar: AppBar(
           title: const Text("Login"),
         ),
-        body: Column(
-          children: [
-            TextField(
-              controller: _emailController,
-              autocorrect: false,
-              enableSuggestions: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                hintText: 'Enter your email',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _emailController,
+                autocorrect: false,
+                enableSuggestions: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  hintText: 'Enter your email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
                 ),
               ),
-            ),
-            TextField(
-              controller: _passwordController,
-              autocorrect: false,
-              enableSuggestions: false,
-              obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Enter password here',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+              const SizedBox(height: 10.0),
+              TextField(
+                controller: _passwordController,
+                autocorrect: false,
+                enableSuggestions: false,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  hintText: 'Enter password here',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () async {
-                final email = _emailController.text;
-                final password = _passwordController.text;
-                context.read<AuthBloc>().add(
-                      AuthEventLogginIn(
-                        email: email,
-                        password: password,
-                      ),
-                    );
-              },
-              child: const Text("Login"),
-            ),
-            TextButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(const AuthEventMoveToRegister());
-              },
-              child: const Text("Not Registered Yet! Register Now."),
-            ),
-          ],
+              TextButton(
+                onPressed: () async {
+                  final email = _emailController.text;
+                  final password = _passwordController.text;
+                  context.read<AuthBloc>().add(
+                        AuthEventLogginIn(
+                          email: email,
+                          password: password,
+                        ),
+                      );
+                },
+                child: const Text("Login"),
+              ),
+              TextButton(
+                onPressed: () {
+                  context.read<AuthBloc>().add(const AuthEventMoveToRegister());
+                },
+                child: const Text("Not Registered Yet! Register Now."),
+              ),
+              TextButton(
+                onPressed: () {
+                  context
+                      .read<AuthBloc>()
+                      .add(const AuthEventMoveToResetPassword());
+                },
+                child: const Text('Forgot password!'),
+              ),
+            ],
+          ),
         ),
       ),
     );
