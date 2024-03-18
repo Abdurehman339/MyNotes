@@ -65,16 +65,23 @@ class LoadingScreen {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(height: 10.0),
-                      const CircularProgressIndicator(),
-                      const SizedBox(height: 10.0),
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: CircularProgressIndicator(
+                          color: Color.fromRGBO(175, 200, 173, 100.0),
+                        ),
+                      ),
                       StreamBuilder(
                         stream: textStream.stream,
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
-                            return Text(
-                              snapshot.data as String,
-                              textAlign: TextAlign.center,
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: Text(
+                                snapshot.data as String,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 15.0),
+                              ),
                             );
                           } else {
                             return Container();
