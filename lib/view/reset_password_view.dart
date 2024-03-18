@@ -29,7 +29,22 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reset Your Password'),
+        backgroundColor: const Color.fromRGBO(136, 171, 142, 100.0),
+        title: const Text(
+          'Reset Your Password',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        titleSpacing: 20.0,
+        toolbarHeight: 60.2,
+        toolbarOpacity: 0.8,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25.0),
+              bottomRight: Radius.circular(25.0)),
+        ),
+        elevation: 0.00,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -39,30 +54,68 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
               controller: _controller,
               autocorrect: false,
               decoration: const InputDecoration(
+                filled: true,
+                fillColor: Color.fromRGBO(242, 241, 235, 100),
                 hintText: 'Enter your email here...',
-                border: OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+                    Radius.circular(25.0),
+                  ),
+                  borderSide: BorderSide(
+                    color: Color.fromRGBO(175, 200, 173, 100.0),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(25.0),
+                  ),
+                  borderSide: BorderSide(
+                    color: Color.fromRGBO(136, 171, 142, 100.0),
+                  ),
+                ),
+              ),
+              cursorColor: const Color.fromRGBO(136, 171, 142, 100.0),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(136, 171, 142, 100.0),
+                ),
+                onPressed: () {
+                  context.read<AuthBloc>().add(
+                        AuthEventSendResetPasswordEmail(
+                          email: _controller.text,
+                        ),
+                      );
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(7.0),
+                  child: Text(
+                    'Send email to change password',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 10),
             TextButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(
-                      AuthEventSendResetPasswordEmail(
-                        email: _controller.text,
-                      ),
-                    );
-              },
-              child: const Text('Send email to change password'),
-            ),
-            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: const Color.fromRGBO(136, 171, 142, 100.0),
+              ),
               onPressed: () {
                 context.read<AuthBloc>().add(const AuthEventLogginOut());
               },
-              child: const Text('Go, Back'),
+              child: const Padding(
+                padding: EdgeInsets.all(7.0),
+                child: Text(
+                  'Go, Back',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

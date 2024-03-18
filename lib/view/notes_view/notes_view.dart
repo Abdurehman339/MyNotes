@@ -31,15 +31,41 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Notes'),
+        title: const Text(
+          "Your Notes",
+          style: TextStyle(color: Colors.white),
+        ),
+        titleSpacing: 20.0,
+        toolbarHeight: 60.2,
+        toolbarOpacity: 0.8,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(25),
+              bottomLeft: Radius.circular(25)),
+        ),
+        elevation: 0.00,
+        backgroundColor: const Color.fromRGBO(136, 171, 142, 100.0),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.of(context).pushNamed(newNoteRoute);
             },
-            icon: const Icon(Icons.add),
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
           ),
           PopupMenuButton<MenuItem>(
+            color: const Color.fromRGBO(242, 241, 235, 20.0),
+            icon: const Icon(
+              Icons.more_vert,
+              color: Colors.white,
+            ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(25.0),
+              ),
+            ),
             onSelected: (value) async {
               switch (value) {
                 case MenuItem.logout:
@@ -52,10 +78,17 @@ class _NotesViewState extends State<NotesView> {
               }
             },
             itemBuilder: (context) {
-              return const [
+              return [
                 PopupMenuItem<MenuItem>(
                   value: MenuItem.logout,
-                  child: Text('Log out'),
+                  padding: const EdgeInsets.all(0),
+                  child: Container(
+                    padding: const EdgeInsets.all(0),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Logout',
+                    ),
+                  ),
                 ),
               ];
             },
@@ -87,10 +120,14 @@ class _NotesViewState extends State<NotesView> {
                       },
                     );
                   } else {
-                    return const Text("Hello");
+                    return Container();
                   }
                 default:
-                  return const CircularProgressIndicator();
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Color.fromRGBO(175, 200, 173, 100.0),
+                    ),
+                  );
               }
             },
           );

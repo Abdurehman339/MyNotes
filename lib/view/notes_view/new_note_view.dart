@@ -92,9 +92,29 @@ class _NewNoteViewState extends State<NewNoteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Note'),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        title: const Text(
+          'New Note',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        titleSpacing: 20.0,
+        toolbarHeight: 60.2,
+        toolbarOpacity: 0.8,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
+          ),
+        ),
+        elevation: 0.00,
+        backgroundColor: const Color.fromRGBO(136, 171, 142, 100.0),
         actions: [
           IconButton(
+            padding: const EdgeInsets.only(right: 20.0),
             onPressed: () async {
               final text = _textController.text;
               if (_note == null || text.isEmpty) {
@@ -103,7 +123,9 @@ class _NewNoteViewState extends State<NewNoteView> {
                 Share.share(text);
               }
             },
-            icon: const Icon(Icons.share),
+            icon: const Icon(
+              Icons.share,
+            ),
           ),
         ],
       ),
@@ -113,16 +135,45 @@ class _NewNoteViewState extends State<NewNoteView> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               _setupTextControllerListener();
-              return TextField(
-                controller: _textController,
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: const InputDecoration(
-                  hintText: 'Start typing your note...',
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: _textController,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    hintText: 'Start typing your note...',
+                    hintStyle: TextStyle(
+                      color: Colors.grey[500],
+                    ),
+                    filled: true,
+                    fillColor: const Color.fromRGBO(242, 241, 235, 100),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ),
+                    ),
+                  ),
+                  cursorColor: const Color.fromRGBO(136, 171, 142, 100.0),
                 ),
               );
             default:
-              return const CircularProgressIndicator();
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Color.fromRGBO(175, 200, 173, 100.0),
+                ),
+              );
           }
         },
       ),

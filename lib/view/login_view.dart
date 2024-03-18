@@ -49,63 +49,175 @@ class _LoginViewState extends State<LoginView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Login"),
+          title: const Text(
+            "Login",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          titleSpacing: 20.0,
+          toolbarHeight: 60.2,
+          toolbarOpacity: 0.8,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25.0),
+              bottomRight: Radius.circular(25.0),
+            ),
+          ),
+          elevation: 0.00,
+          backgroundColor: const Color.fromRGBO(136, 171, 142, 100.0),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              TextField(
-                controller: _emailController,
-                autocorrect: false,
-                enableSuggestions: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  hintText: 'Enter your email',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                ),
+                child: TextField(
+                  controller: _emailController,
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Color.fromRGBO(242, 241, 235, 100),
+                    hintText: 'Enter your email',
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25),
+                      ),
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ),
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                    ),
                   ),
+                  cursorColor: const Color.fromRGBO(136, 171, 142, 100.0),
                 ),
               ),
-              const SizedBox(height: 10.0),
-              TextField(
-                controller: _passwordController,
-                autocorrect: false,
-                enableSuggestions: false,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: 'Enter password here',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                ),
+                child: TextField(
+                  controller: _passwordController,
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Color.fromRGBO(242, 241, 235, 100),
+                    hintText: 'Enter password here',
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ),
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ),
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                    ),
                   ),
+                  cursorColor: const Color.fromRGBO(136, 171, 142, 100.0),
                 ),
               ),
-              TextButton(
-                onPressed: () async {
-                  final email = _emailController.text;
-                  final password = _passwordController.text;
-                  context.read<AuthBloc>().add(
-                        AuthEventLogginIn(
-                          email: email,
-                          password: password,
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                  right: 10.0,
+                  left: 10.0,
+                ),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor:
+                          const Color.fromRGBO(136, 171, 142, 100.0)),
+                  onPressed: () async {
+                    final email = _emailController.text;
+                    final password = _passwordController.text;
+                    context.read<AuthBloc>().add(
+                          AuthEventLogginIn(
+                            email: email,
+                            password: password,
+                          ),
+                        );
+                  },
+                  child: const Padding(
+                      padding: EdgeInsets.all(7.0),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
-                      );
-                },
-                child: const Text("Login"),
+                      )),
+                ),
               ),
-              TextButton(
-                onPressed: () {
-                  context.read<AuthBloc>().add(const AuthEventMoveToRegister());
-                },
-                child: const Text("Not Registered Yet! Register Now."),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                  right: 10.0,
+                  left: 10.0,
+                ),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(136, 171, 142, 100.0),
+                  ),
+                  onPressed: () {
+                    context
+                        .read<AuthBloc>()
+                        .add(const AuthEventMoveToRegister());
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(7.0),
+                    child: Text(
+                      "Not Registered Yet! Register Now.",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              TextButton(
-                onPressed: () {
-                  context
-                      .read<AuthBloc>()
-                      .add(const AuthEventMoveToResetPassword());
-                },
-                child: const Text('Forgot password!'),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                  left: 10.0,
+                  right: 10.0,
+                ),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(136, 171, 142, 100.0),
+                  ),
+                  onPressed: () {
+                    context
+                        .read<AuthBloc>()
+                        .add(const AuthEventMoveToResetPassword());
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(7.0),
+                    child: Text(
+                      'Forgot password!',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

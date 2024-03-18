@@ -18,11 +18,8 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: null,
       title: 'Notes',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
       home: BlocProvider(
         create: (context) => AuthBloc(FirebaseAuthProvider()),
         child: const HomePage(),

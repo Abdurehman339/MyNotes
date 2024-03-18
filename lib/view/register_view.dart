@@ -58,55 +58,149 @@ class _RegisterViewState extends State<RegisterView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Register"),
+          title: const Text(
+            "Register",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          titleSpacing: 20.0,
+          toolbarHeight: 60.2,
+          toolbarOpacity: 0.8,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25.0),
+              bottomRight: Radius.circular(25.0),
+            ),
+          ),
+          elevation: 0.00,
+          backgroundColor: const Color.fromRGBO(136, 171, 142, 100.0),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              TextField(
-                controller: _emailController,
-                autocorrect: false,
-                enableSuggestions: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  hintText: "Enter email here",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                ),
+                child: TextField(
+                  controller: _emailController,
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Color.fromRGBO(242, 241, 235, 100),
+                    hintText: "Enter email here",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ),
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ),
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                    ),
+                  ),
+                  cursorColor: const Color.fromRGBO(136, 171, 142, 100.0),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                ),
+                child: TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Color.fromRGBO(242, 241, 235, 100),
+                    hintText: "Enter password here",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ),
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
+                      ),
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(175, 200, 173, 100.0),
+                      ),
+                    ),
+                  ),
+                  cursorColor: const Color.fromRGBO(136, 171, 142, 100.0),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                  left: 10.0,
+                  right: 10.0,
+                ),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor:
+                          const Color.fromRGBO(136, 171, 142, 100.0)),
+                  onPressed: () async {
+                    // try {
+                    final email = _emailController.text;
+                    final password = _passwordController.text;
+                    context.read<AuthBloc>().add(
+                          AuthEventRegister(
+                            email: email,
+                            password: password,
+                          ),
+                        );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(7.0),
+                    child: Text(
+                      "Register",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(height: 10.0),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                autocorrect: false,
-                enableSuggestions: false,
-                decoration: const InputDecoration(
-                    hintText: "Enter password here",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    )),
-              ),
-              TextButton(
-                onPressed: () async {
-                  // try {
-                  final email = _emailController.text;
-                  final password = _passwordController.text;
-                  context.read<AuthBloc>().add(
-                        AuthEventRegister(
-                          email: email,
-                          password: password,
-                        ),
-                      );
-                },
-                child: const Text("Register"),
-              ),
-              TextButton(
-                onPressed: () {
-                  context.read<AuthBloc>().add(const AuthEventLogginOut());
-                },
-                child: const Text("Already Register! Login Now."),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                  left: 10.0,
+                  right: 10.0,
+                ),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor:
+                          const Color.fromRGBO(136, 171, 142, 100.0)),
+                  onPressed: () {
+                    context.read<AuthBloc>().add(const AuthEventLogginOut());
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(7.0),
+                    child: Text(
+                      "Already Register! Login Now.",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
